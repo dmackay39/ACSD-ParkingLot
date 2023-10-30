@@ -12,6 +12,9 @@ public class LongTermParkingLot implements ParkingLot{
 //        Daily max is $15
 //        On the first day, the first half hour is free
 
-        return 0;
+        int hours = ticket.getHours();
+
+        return hours * 2;
+
     }
 }
