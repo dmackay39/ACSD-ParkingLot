@@ -48,4 +48,64 @@ public class LongTermParkingLotTests {
         Assertions.assertEquals(expectedResult,actualResult);
     }
 
+    @ParameterizedTest
+    @CsvSource({"1,0,0,15"})
+    public void test1DayStay(int days, int hours, int minutes, int expectedResult){
+        when(mockTicket.getDays()).thenReturn(days);
+        when(mockTicket.getHours()).thenReturn(hours);
+        when(mockTicket.getMinutes()).thenReturn(minutes);
+
+        actualResult = uut.calculateFee(mockTicket);
+
+        Assertions.assertEquals(expectedResult,actualResult);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0,0,1,0"})
+    public void test1MinuteStay(int days, int hours, int minutes, int expectedResult){
+        when(mockTicket.getDays()).thenReturn(days);
+        when(mockTicket.getHours()).thenReturn(hours);
+        when(mockTicket.getMinutes()).thenReturn(minutes);
+
+        actualResult = uut.calculateFee(mockTicket);
+
+        Assertions.assertEquals(expectedResult,actualResult);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"1,1,1,19"})
+    public void test1DayHourMinuteStay(int days, int hours, int minutes, int expectedResult){
+        when(mockTicket.getDays()).thenReturn(days);
+        when(mockTicket.getHours()).thenReturn(hours);
+        when(mockTicket.getMinutes()).thenReturn(minutes);
+
+        actualResult = uut.calculateFee(mockTicket);
+
+        Assertions.assertEquals(expectedResult,actualResult);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0,0,1,0","0,0,30,0"})
+    public void testFirst30MinutesStay(int days, int hours, int minutes, int expectedResult){
+        when(mockTicket.getDays()).thenReturn(days);
+        when(mockTicket.getHours()).thenReturn(hours);
+        when(mockTicket.getMinutes()).thenReturn(minutes);
+
+        actualResult = uut.calculateFee(mockTicket);
+
+        Assertions.assertEquals(expectedResult,actualResult);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"0,8,0,15","0,8,5,15"})
+    public void testMaxDailyCharge(int days, int hours, int minutes, int expectedResult){
+        when(mockTicket.getDays()).thenReturn(days);
+        when(mockTicket.getHours()).thenReturn(hours);
+        when(mockTicket.getMinutes()).thenReturn(minutes);
+
+        actualResult = uut.calculateFee(mockTicket);
+
+        Assertions.assertEquals(expectedResult,actualResult);
+    }
+
 }

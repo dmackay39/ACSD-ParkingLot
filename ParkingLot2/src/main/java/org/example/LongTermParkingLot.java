@@ -1,6 +1,6 @@
 package org.example;
 
-public class LongTermParkingLot implements ParkingLot{
+public class LongTermParkingLot implements ParkingLot {
     @Override
     public int calculateFee(Ticket ticket) {
 // ToDo:  Use TDD to Implement this function
@@ -13,8 +13,29 @@ public class LongTermParkingLot implements ParkingLot{
 //        On the first day, the first half hour is free
 
         int hours = ticket.getHours();
+        int days = ticket.getDays();
+        int minutes = ticket.getMinutes();
 
-        return hours * 2;
+        int hourFee;
+        int dayFee;
+        int parkingFee;
+
+        if (days == 0 && hours == 0 && minutes <= 30) {
+            parkingFee = 0;
+        } else {
+            dayFee = days * 15;
+            if (minutes > 0) {
+                hours += 1;
+            }
+            if (hours > 7)
+                hourFee = 15;
+            else {
+                hourFee = hours * 2;
+            }
+            parkingFee = dayFee + hourFee;
+        }
+
+        return parkingFee;
 
     }
 }
